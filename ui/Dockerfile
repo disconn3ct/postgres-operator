@@ -1,4 +1,6 @@
-FROM registry.opensource.zalan.do/library/alpine-3.15:latest
+ARG ALPINE_VERSION=3.15
+FROM ${DOCKER_REGISTRY:+$DOCKER_REGISTRY/}alpine:${ALPINE_VERSION}
+
 LABEL maintainer="Team ACID @ Zalando <team-acid@zalando.de>"
 
 EXPOSE 8081
