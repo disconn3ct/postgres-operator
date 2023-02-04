@@ -16,10 +16,6 @@ RUN go mod vendor
 
 RUN GOOS=${TARGETOS} GOARCH=${TARGETARCH} CGO_ENABLED=0 go build -o build/linux/postgres-operator -v -ldflags "-X=main.version=modac" cmd/main.go
 
-RUN apk add file
-RUN ls -l build/linux
-RUN file build/linux/*
-
 FROM alpine:3.15 AS postgres-operator
 LABEL maintainer="Team ACID @ Zalando <team-acid@zalando.de>"
 
@@ -35,3 +31,4 @@ RUN adduser -D -u 1000 -G pgo -g 'Postgres Operator' pgo
 USER 1000:1000
 
 ENTRYPOINT ["/postgres-operator"]
+
